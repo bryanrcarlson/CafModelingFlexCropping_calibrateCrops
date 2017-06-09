@@ -1,0 +1,25 @@
+---
+title: "Crop Calibration"
+author: "Bryan Carlson"
+date: "June 8, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Set up script
+```{r}
+source("ggplotRegression.R")
+```
+
+## Set environmental vars
+```{r}
+path.to.obs <- "C:\\OneDrive\\OneDrive - Washington State University (email.wsu.edu)\\Projects\\CafModelingFlexCropping\\Methods\\Calibration"
+```
+
+## Initial runs after fixing bug that caused initial soil conditions to be set at avg water content instead of PWP
+```{r}
+ggplotRegression(path.to.obs, "Input\\17-05-09_21_season_all.dat")
+```
