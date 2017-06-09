@@ -16,10 +16,87 @@ source("ggplotRegression.R")
 
 ## Set environmental vars
 ```{r}
-path.to.obs <- "C:\\OneDrive\\OneDrive - Washington State University (email.wsu.edu)\\Projects\\CafModelingFlexCropping\\Methods\\Calibration"
+path.obs <- "C:\\OneDrive\\OneDrive - Washington State University (email.wsu.edu)\\Projects\\CafModelingFlexCropping\\Methods\\Calibration\\compileObservedData\\variety-trial-data.xlsx"
+
+
 ```
 
-## Initial runs after fixing bug that caused initial soil conditions to be set at avg water content instead of PWP
+## Calibrate spring canola
+* Initial run after fixing bug that caused initial soil conditions to be set at avg water content instead of PWP
 ```{r}
-ggplotRegression(path.to.obs, "Input\\17-05-09_21_season_all.dat")
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170608.dat", "sC-wW"))
 ```
+* HI 0.3 -> 0.35 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/e933c26e01a1cea301df8cda6d3dbc4d01a077cd#diff-8fb462d4d9caaeef85ac8a8f5a530157]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609_1.dat", "sC-wW"))
+```
+
+* TUE 5.0 -> 5.2 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/f6328902d4dd9fb2303548bc80c2e70e7f5872aa#diff-8fb462d4d9caaeef85ac8a8f5a530157]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609_2.dat", "sC-wW"))
+```
+
+* TUE 5.2 -> 5.5 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/fce970cc94199ecf3b538f0908ece0a0f24af007#diff-8fb462d4d9caaeef85ac8a8f5a530157]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609_3.dat", "sC-wW"))
+```
+
+* translocation_max 0.02 -> 0.8 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/3ea330c5fa5a02914bbaddccb79da66c0ba60d06#diff-8fb462d4d9caaeef85ac8a8f5a530157]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609_4.dat", "sC-wW"))
+```
+
+* translocation_max 0.8 -> 0.5 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/7835bf042550709c3b475c99ed221db78352b398#diff-8fb462d4d9caaeef85ac8a8f5a530157]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609_5.dat", "sC-wW"))
+```
+
+* translocation_max 0.5 -> 0.1 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/935e1036161c0153e9643949aee3259aa2f06100#diff-8fb462d4d9caaeef85ac8a8f5a530157]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609_6.dat", "sC-wW"))
+```
+
+* translocation_max 0.1 -> 0.2 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/aa8219ea56bf0bfc84a1a7bf8f9df1e6827949dc#diff-8fb462d4d9caaeef85ac8a8f5a530157]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609_7.dat", "sC-wW"))
+```
+
+* translocation_max 0.2 -> 0.15 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/185b1ba004f5fadcdc5e93f23919a36173ab3174#diff-8fb462d4d9caaeef85ac8a8f5a530157]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609_8.dat", "sC-wW"))
+```
+
+
+
+## Calibrate spring wheat
+* Initial run after fixing bug that caused initial soil conditions to be set at avg water content instead of PWP
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sw_170608.dat", "sW-wW"))
+```
+
+* To match REACCH crop file calibrated for intermediate rainfall zone, initial_GAI 0.03 -> 0.04, stem_leaf_partition 2.5 -> 2.25, TUE_at_1pKa_VPD 5.0 -> 4.6, max_root_depth 1.5 -> 1.7 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/e72523623b0adbf7049cc1a7ae17ea141f65617e#diff-51ad4c92b4d0e58226e6afc6d1ffd09f]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sw_170609_1.dat", "sW-wW"))
+```
+
+* translocation_max 0.35 -> 0.1 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/b6555289548dda5c0061e581e7f547a93ba35503#diff-51ad4c92b4d0e58226e6afc6d1ffd09f]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sw_170609_2.dat", "sW-wW"))
+```
+
+* translocation_max 0.1 -> 0.3, initial_GAI 0.04 -> 0.03, stem_leaf_partition 2.25 -> 2.5, TUE_at_1pKa_VPD 4.6 -> 5.0, max_root_depth 1.7 -> 1.5 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/e26666e54c7776ca38848bf13c0c95d1f905c758#diff-51ad4c92b4d0e58226e6afc6d1ffd09f]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sw_170609_3.dat", "sW-wW"))
+```
+
+* translocation_max 0.3 -> 0.35, flowering_sensitivity 0.2 -> 1.0 [https://github.com/bryanrcarlson/CafModelingFlexCropping_CropSyst/commit/bbbea9a9a6e1b13ba944f4b76fcd17d9659f6f1e#diff-51ad4c92b4d0e58226e6afc6d1ffd09f]
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sw_170609_4.dat", "sW-wW"))
+```
+
+## Calibrating spring pea
+* Initial
+```{r}
+ggplotRegression(prepareData(path.obs, "Input\\season_sp_170608.dat", "sP-wW"))
+```
+

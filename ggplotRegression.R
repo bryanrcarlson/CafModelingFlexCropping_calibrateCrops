@@ -14,13 +14,16 @@ prepareData <- function(path.obs, path.sim, rotation.to.return) {
   # Add rotation column to merge with sim results
   df.obs$rotation <- ifelse(df.obs$Crop == "Spring Wheat", "sW-wW", ifelse(df.obs$Crop == "Spring Canola", "sC-wW", ifelse(df.obs$Crop == "Spring Pea", "sP-wW", "")))
   
+  # Remove all obs not specified by rotation.to.return
+  df.obs <- df.obs[df.obs$rotation == rotation.to.return,]
+  
   # Rename column to match sim and change column class to numeric
   df.obs <- rename(df.obs, c("Sim-Location"="location"))
   df.obs$Yield <- as.numeric(df.obs$Yield)
   
   ### Prepar sim data
   # Read data with simulated yield, only read required columns
-  columnClasses = c("Date", rep("NULL", 10), "numeric", rep("NULL", 70), rep("character", 3), "NULL")
+  columnClasses = c("Date", rep("NULL", 10), "numeric", rep("NULL", 70), rep("character", 2), "NULL")
   df.sim <- read.table(path.sim, colClasses = columnClasses, sep="\t", header=TRUE)
   
   # Convert units (from/to?) and extract planting year from date
@@ -29,16 +32,12 @@ prepareData <- function(path.obs, path.sim, rotation.to.return) {
   
   ### Merge data
   # Merge sim and obs dataframes by location and  year
-  df <- merge(df.obs, df.sim, by=c("location", "Year", "rotation"))
+  df <- merge(df.obs, df.sim, by=c("location", "Year"))
   
   # Rename yield columns for clarity
   df <- rename(df, c("Yield"="yield.obs", "yield"="yield.sim"))
   
   # Split based on crop/rotation
-  df.sw <- df[df$rotation == "sW-wW",]
-  df.sp <- df[df$rotation == "sP-wW",]
-  df.sc <- df[df$rotation == "sC-wW",]
-  
   df <- df[df$rotation == rotation.to.return,]
 
   return(df)
@@ -61,10 +60,5 @@ ggplotRegression <- function(df) {
                        " P =",signif(summary(fit)$coef[2,4], 5)))
 }
 
-## =======================
-
-path.obs <- "C:\\OneDrive\\OneDrive - Washington State University (email.wsu.edu)\\Projects\\CafModelingFlexCropping\\Methods\\Calibration\\variety-trial-data.xlsx"
-
-ggplotRegression(prepareData(path.obs, "Input\\season_all_170608.dat", "sC-wW"))
-ggplotRegression(prepareData(path.obs, "Input\\season_all_170608.dat", "sW-wW"))
-ggplotRegression(prepareData(path.obs, "Input\\season_all_170608.dat", "sP-wW"))
+#path.obs <- "C:\\OneDrive\\OneDrive - Washington State University (email.wsu.edu)\\Projects\\CafModelingFlexCropping\\Methods\\Calibration\\compileObservedData\\variety-trial-data.xlsx"
+#ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609.dat", "sC-wW"))
