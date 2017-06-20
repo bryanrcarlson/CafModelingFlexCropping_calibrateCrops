@@ -2,7 +2,9 @@
 title: "Crop Calibration"
 author: "Bryan Carlson"
 date: "June 8, 2017"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}

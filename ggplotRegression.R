@@ -60,5 +60,5 @@ ggplotRegression <- function(df) {
                        " P =",signif(summary(fit)$coef[2,4], 5)))
 }
 
-#path.obs <- "C:\\OneDrive\\OneDrive - Washington State University (email.wsu.edu)\\Projects\\CafModelingFlexCropping\\Methods\\Calibration\\compileObservedData\\variety-trial-data.xlsx"
-#ggplotRegression(prepareData(path.obs, "Input\\season_sc_170609.dat", "sC-wW"))
+path.obs <- "C:\\OneDrive\\OneDrive - Washington State University (email.wsu.edu)\\Projects\\CafModelingFlexCropping\\Methods\\Calibration\\compileObservedData\\variety-trial-data.xlsx"
+ggplotRegression(prepareData(path.obs, "Input\\season_sw_170609_4.dat", "sW-wW"))
